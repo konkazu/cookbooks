@@ -2,9 +2,9 @@
 # Cookbook Name:: keyboard
 # Recipe:: default
 #
-# Copyright 2011, YOUR_COMPANY_NAME
+# Copyright 2011, ryuzee 
 #
-# All rights reserved - Do Not Redistribute
+# MIT License 
 #
 case node[:platform]
 when "debian","ubuntu"
