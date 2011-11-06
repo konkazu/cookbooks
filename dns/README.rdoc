@@ -2,7 +2,7 @@
 Set resolver IP addresses.
 
 = REQUIREMENTS:
-None
+CentOS5 only
 
 = ATTRIBUTES:
 default["primary_dns"]		default value is "8.8.8.8"

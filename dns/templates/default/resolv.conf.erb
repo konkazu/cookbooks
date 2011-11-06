@@ -1,4 +1,3 @@
-nameserver <%= node["primary_dns"] %>
-<% unless node["secondary_dns"] == nil then %>
-nameserver <%= node["secondary_dns"] %>
+<% node["nameservers"].each do |ns| %>
+nameserver <%= ns %>
 <% end %>

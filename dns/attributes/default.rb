@@ -1,1 +1,1 @@
-default["primary_dns"] = "8.8.8.8"
+default["nameservers"] = ["8.8.8.8","8.8.4.4"]
