@@ -6,6 +6,8 @@
 #
 # MIT License
 #
+include_recipe "rpmrepos"
+
 case node[:platform]
 when "centos"
   # change yum settings
