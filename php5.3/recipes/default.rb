@@ -10,7 +10,7 @@ include_recipe "rpmrepos"
 
 case node[:platform]
 when "centos"
-  %w{php53 php53-common php53-cli php53-mbstring php53-mcrypt php53-pdo php53-mysql php53-xml}.each do |package_name|
+  %w{php53 php53-common php53-cli php53-mbstring php53-mcrypt php53-pdo php53-mysql php53-xml php-pear}.each do |package_name|
     package package_name do
       action :install
       options "--disablerepo=\* --enablerepo=remi,epel"
