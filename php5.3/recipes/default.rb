@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: php5.3 
+# Cookbook Name:: php5.3 From Remi
 # Recipe:: default
 #
 # Copyright 2011, ryuzee 
@@ -10,10 +10,17 @@ include_recipe "rpmrepos"
 
 case node[:platform]
 when "centos"
-  %w{php53 php53-common php53-cli php53-mbstring php53-mcrypt php53-pdo php53-mysql php53-xml php-pear}.each do |package_name|
+  # change yum settings
+  %w{/etc/yum.repos.d/remi.repo /etc/yum.repos.d/epel.repo}.each do |file|
+    e = execute "sed -e s/enabled=0/enabled=1/ ".concat(file).concat(" > /tmp/1; mv /tmp/1 ").concat(file) do
+      action :run
+    end
+  end
+
+  %w{libedit php php-common php-cli php-devel php-mbstring php-pdo php-mysql php-xml php-pear}.each do |package_name|
     package package_name do
       action :install
-      options "--disablerepo=\* --enablerepo=remi,epel"
+      options "--disablerepo=\\* --enablerepo=remi"
     end
   end
 
@@ -27,5 +34,13 @@ when "centos"
   service "httpd" do
     action :restart
   end
+
+  # restore yum settings
+  %w{/etc/yum.repos.d/remi.repo /etc/yum.repos.d/epel.repo}.each do |file|
+    e = execute "sed -e s/enabled=1/enabled=0/ ".concat(file).concat(" > /tmp/1; mv /tmp/1 ").concat(file) do
+      action :run
+    end
+  end
+
 else
 end

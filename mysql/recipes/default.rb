@@ -21,7 +21,7 @@ when "centos"
     yum_package package_name do
       action :install
       # for perl-DBI, I did not disable centos standard repository
-      options "--enablerepo=remi,epel"
+      options "--enablerepo=remi"
     end
   end
 
