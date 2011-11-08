@@ -17,7 +17,20 @@ when "centos"
     end
   end
 
-  %w{libedit php php-common php-cli php-devel php-mbstring php-pdo php-mysql php-xml php-pear}.each do |package_name|
+  %w{libedit}.each do |package_name|
+    package package_name do
+      action :install
+      options "--disablerepo=\\* --enablerepo=epel"
+    end
+  end
+
+  %w{httpd}.each do |package_name|
+    package package_name do
+      action :install
+    end
+  end
+
+  %w{php php-common php-cli php-devel php-mbstring php-pdo php-mysql php-xml php-pear}.each do |package_name|
     package package_name do
       action :install
       options "--disablerepo=\\* --enablerepo=remi"
