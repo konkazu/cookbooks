@@ -1,6 +1,6 @@
 maintainer       "Ryuzee"
 maintainer_email "ryuzee@gmail.com"
-license          "MIT Lisence"
+license          "MIT License"
 description      "Installs/Configures rpmrepos"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
 version          "0.0.1"
