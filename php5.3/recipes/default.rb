@@ -30,10 +30,10 @@ when "centos"
     end
   end
 
-  %w{php php-common php-cli php-devel php-mbstring php-pdo php-mysql php-xml php-pear}.each do |package_name|
+  %w{php53 php53-common php53-cli php53-devel php53-mbstring php53-pdo php53-mysql php53-xml php-pear}.each do |package_name|
     package package_name do
       action :install
-      options "--disablerepo=\\* --enablerepo=remi"
+      options "--skip-broken --disablerepo=\\* --enablerepo=remi"
     end
   end
 
