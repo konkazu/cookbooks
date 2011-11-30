@@ -70,3 +70,14 @@ end
 php_pear "xdebug" do
   action :install
 end
+
+case node[:platform]
+when "centos"
+  template "/etc/php.d/xdebug.ini" do
+    source "xdebug.ini.erb"
+    owner "root"
+    group "root"
+    mode "0644"
+  end
+end
+
