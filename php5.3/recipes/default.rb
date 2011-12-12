@@ -30,12 +30,24 @@ when "centos"
     end
   end
 
-  %w{php53 php53-common php53-cli php53-devel php53-mbstring php53-pdo php53-mysql php53-xml php-pear}.each do |package_name|
-    package package_name do
+  php_packages = {
+    "php"          => {"version" => "5.3.8-5.el5.remi.1"},
+    "php-common"   => {"version" => "5.3.8-5.el5.remi.1"},
+    "php-cli"      => {"version" => "5.3.8-5.el5.remi.1"},
+    "php-devel"    => {"version" => "5.3.8-5.el5.remi.1"},
+    "php-mbstring" => {"version" => "5.3.8-5.el5.remi.1"},
+    "php-pdo"      => {"version" => "5.3.8-5.el5.remi.1"},
+    "php-mysql"    => {"version" => "5.3.8-5.el5.remi.1"},
+    "php-xml"      => {"version" => "5.3.8-5.el5.remi.1"},
+    "php-pear"     => {"version" => "1.9.4-3.el5.remi"},
+  }
+  php_packages.each{|key, value|
+    package key do
+      version value["version"]
       action :install
       options "--skip-broken --disablerepo=\\* --enablerepo=remi"
     end
-  end
+  }
 
   template "/etc/php.ini" do
     source "php.ini.erb"
