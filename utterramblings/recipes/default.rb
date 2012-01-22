@@ -58,6 +58,10 @@ when "centos"
     action [:enable, :restart]
   end
 
+  service "postgresql" do
+    action [:enable, :restart]
+  end
+
   template "/etc/yum.repos.d/utterramblings.repo" do
     source "utterramblings.repo.erb"
     owner "root"
