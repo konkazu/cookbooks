@@ -21,7 +21,7 @@ when "centos"
     mode "0644"
   end
 
-  %w{apr apr-devel gmp-devel httpd httpd-devel postgresql-server}.each do |package_name|
+  %w{apr apr-devel gmp-devel httpd httpd-devel mod_ssl postgresql-server}.each do |package_name|
     package package_name do
       action :install
       options "--disablerepo=\\* --enablerepo=base,updates"
@@ -53,6 +53,10 @@ when "centos"
       options "--skip-broken --disablerepo=\\* --enablerepo=utterramblings"
     end
   }
+
+  service "httpd" do
+    action [:enable, :restart]
+  end
 
   template "/etc/yum.repos.d/utterramblings.repo" do
     source "utterramblings.repo.erb"
