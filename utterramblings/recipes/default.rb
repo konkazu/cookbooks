@@ -55,11 +55,11 @@ when "centos"
   }
 
   service "httpd" do
-    action [:enable, :restart]
+    action [:enable, :start]
   end
 
   service "postgresql" do
-    action [:enable, :restart]
+    action [:enable, :start]
   end
 
   template "/etc/yum.repos.d/utterramblings.repo" do
