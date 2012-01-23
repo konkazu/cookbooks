@@ -54,6 +54,26 @@ when "centos"
     end
   }
 
+  ## update pear channel
+  php_pear_channel "pear.php.net" do
+    action :update
+  end
+
+  ## install pear packages
+  %w{DB_DataObject Net_UserAgent_Mobile Net_Socket Net_SMTP XML_Parser Mail}.each do |pkg|
+    php_pear pkg do
+      action :install
+    end
+  end
+
+  include_recipe "perl"
+
+  %w{Mime::Lite OLE Spreadsheet_Excel_Writer}.each do |pkg|
+    cpan_module pkg do
+      action :install
+    end
+  end
+
   service "httpd" do
     action [:enable, :start]
   end
