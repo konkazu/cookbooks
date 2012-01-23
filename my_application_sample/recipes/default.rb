@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: utterramblings 
+# Cookbook Name:: my_application_sample 
 # Recipe:: default
 #
 # Copyright 2012, ryuzee 
@@ -32,6 +32,21 @@ when "centos"
     e = execute "sed -e s/enabled=0/enabled=1/ ".concat(file).concat(" > /tmp/1; mv /tmp/1 ").concat(file) do
       action :run
     end
+  end
+
+  cmd="wget http://download.fedora.redhat.com/pub/epel/5/i386/memcached-1.4.5-1.el5.i386.rpm -O /tmp/memcached-1.4.5-1.el5.i386.rpm" 
+  execute cmd do
+    action :run
+  end
+
+  package "memcached" do
+    action :install
+    source "/tmp/memcached-1.4.5-1.el5.i386.rpm"
+    provider Chef::Provider::Package::Rpm
+  end
+
+  service "memcached" do
+    action [:enable, :start]
   end
 
   php_packages = {
