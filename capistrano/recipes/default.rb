@@ -6,7 +6,7 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-%w{capistrano capistrano-ext capistrano_colors}.each do |package_name|
+%w{capistrano capistrano-ext capistrano_colors railsless-deploy}.each do |package_name|
   gem_package package_name do
     action :install
   end

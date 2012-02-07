@@ -21,7 +21,7 @@ when "centos"
     mode "0644"
   end
 
-  %w{apr apr-devel gmp-devel httpd httpd-devel mod_ssl postgresql-server}.each do |package_name|
+  %w{apr apr-devel gmp-devel httpd httpd-devel mod_ssl postgresql-server perl-DBD-Pg}.each do |package_name|
     package package_name do
       action :install
       options "--disablerepo=\\* --enablerepo=base,updates"
@@ -83,7 +83,7 @@ when "centos"
 
   include_recipe "perl"
 
-  %w{Mime::Lite OLE Spreadsheet_Excel_Writer}.each do |pkg|
+  %w{DBI Mime::Lite OLE Spreadsheet_Excel_Writer}.each do |pkg|
     cpan_module pkg do
       action :install
     end
