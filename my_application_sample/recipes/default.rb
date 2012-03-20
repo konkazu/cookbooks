@@ -83,10 +83,28 @@ when "centos"
 
   include_recipe "perl"
 
-  %w{DBI Mime::Lite OLE Spreadsheet_Excel_Writer}.each do |pkg|
+  %w{DBI Mime::Lite OLE Spreadsheet_Excel_Writer Readonly}.each do |pkg|
     cpan_module pkg do
       action :install
     end
+  end
+
+  execute "sudo chmod 777 /var/log/httpd" do
+    action :run
+  end
+
+  template "/etc/logrotate.d/httpd" do
+    source "httpd.erb"
+    owner "root"
+    group "root"
+    mode "0644"
+  end
+
+  template "/etc/logrotate.d/httpd_ssl" do
+    source "httpd_ssl.erb"
+    owner "root"
+    group "root"
+    mode "0644"
   end
 
   service "httpd" do

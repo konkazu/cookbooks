@@ -1,0 +1,10 @@
+/var/log/httpd/access* /var/log/httpd/error* /var/log/httpd/cookie* {
+    missingok
+    #notifempty
+    rotate 5
+    sharedscripts
+    postrotate
+        /sbin/service httpd reload > /dev/null 2>/dev/null || true
+    endscript
+}
+

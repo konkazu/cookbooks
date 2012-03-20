@@ -1,0 +1,10 @@
+/var/log/httpd/ssl* {
+    missingok
+    #notifempty
+    rotate 5
+    sharedscripts
+    postrotate
+        /sbin/service httpd_ssl reload > /dev/null 2>/dev/null || true
+    endscript
+}
+
