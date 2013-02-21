@@ -21,6 +21,13 @@ package "perl" do
   action :upgrade
 end
 
+case node[:platform]
+when "centos","redhat"
+  package "perl-CPAN" do
+    action :upgrade
+  end
+end
+
 package "libwww-perl" do
   case node[:platform]
   when "centos"
@@ -49,7 +56,7 @@ end
 cookbook_file "CPAN-Config.pm" do
   case node[:platform]
   when "centos","redhat"
-    path "/usr/lib/perl5/5.8.8/CPAN/Config.pm"
+    path "/usr/share/perl5/CPAN/Config.pm"
   when "arch"
     path "/usr/share/perl5/core_perl/CPAN/Config.pm"
   else
