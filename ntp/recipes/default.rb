@@ -2,20 +2,28 @@
 # Cookbook Name:: ntp
 # Recipe:: default
 #
-# Copyright 2011, YOUR_COMPANY_NAME
+# Copyright 2013, ryuzee
 #
 # All rights reserved - Do Not Redistribute
 #
-package "ntp" do
-  action :install
-end
 
-cmd = "/usr/sbin/ntpdate -s ntp1.jst.mfeed.ad.jp"
-e = execute cmd do
-  action :run
-end
+case node[:platform]
+when "centos", "amazon"
+  package "ntp" do
+    action :install
+  end
 
-cron "ntpdate" do
-  user "root"
-  command cmd
+  cmd = "/usr/sbin/ntpdate -s ntp1.jst.mfeed.ad.jp"
+  e = execute cmd do
+    action :run
+  end
+
+  package "crontabs" do
+    action :install
+  end
+
+  cron "ntpdate" do
+    user "root"
+    command cmd
+  end
 end
