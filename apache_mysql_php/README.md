@@ -1,14 +1,18 @@
-= DESCRIPTION:
+DESCRIPTION
+===========
 Installing Apache, MySQL and PHP 
 
-= REQUIREMENTS:
+REQUIREMENTS
+===========
 For Amazon Linux and CentOS
 
-= ATTRIBUTES:
+ATTRIBUTES
+===========
 php:memory_limit		int (without M)
 php:max_execution_time	int
 php:upload_max_filesize	int (without M)
 mysql:root_password
 
-= USAGE:
+USAGE
+===========
 

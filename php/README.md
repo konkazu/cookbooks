@@ -1,11 +1,15 @@
-= DESCRIPTION:
+DESCRIPTION
+===========
 This recipe is from opscode.
 And this is for pear command only.
 If you want to install php, please use php5.3 recipe
 
-= REQUIREMENTS:
+REQUIREMENTS
+===========
 
-= ATTRIBUTES:
+ATTRIBUTES
+===========
 
-= USAGE:
+USAGE
+===========
 

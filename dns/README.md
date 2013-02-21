@@ -1,12 +1,16 @@
-= DESCRIPTION:
+DESCRIPTION
+===========
 Set resolver IP addresses.
 
-= REQUIREMENTS:
+REQUIREMENTS
+===========
 CentOS5 only
 
-= ATTRIBUTES:
+ATTRIBUTES
+===========
 default["primary_dns"]		default value is "8.8.8.8"
 default["secondary_dns"] 	default value is not set (nil)
 
-= USAGE:
+USAGE
+===========
 
