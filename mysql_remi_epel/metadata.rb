@@ -1,3 +1,4 @@
+name             "mysql_remi_epel"
 maintainer       "Ryuzee"
 maintainer_email "ryuzee@gmail.com"
 license          "MIT License"

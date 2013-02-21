@@ -1,3 +1,4 @@
+name             "my_application_sample"
 maintainer       "ryuzee"
 maintainer_email "ryuzee@gmail.com"
 license          "All rights reserved"

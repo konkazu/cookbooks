@@ -1,3 +1,4 @@
+name             "ntp"
 maintainer       "ryuzee"
 maintainer_email "ryuzee@gmail.com"
 license          "All rights reserved"

@@ -1,3 +1,4 @@
+name             "php5.3"
 maintainer       "Ryuzee"
 maintainer_email "ryuzee@gmail.com"
 license          "MIT License"

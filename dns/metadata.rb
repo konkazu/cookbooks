@@ -1,3 +1,4 @@
+name             "dns"
 maintainer       "Ryuzee"
 maintainer_email "ryuzee@gmail.com"
 license          "MIT License"

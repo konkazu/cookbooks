@@ -1,3 +1,4 @@
+name             "jenkins_php"
 maintainer       "ryuzee"
 maintainer_email "iryuzee@gmail.com"
 license          "All rights reserved"
