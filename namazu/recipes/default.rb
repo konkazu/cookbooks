@@ -2,13 +2,20 @@
 # Cookbook Name:: namazu
 # Recipe:: default
 #
-# Copyright 2012, ryuzee 
+# Copyright 2013, ryuzee 
 #
 # MIT License
 #
 
 package "nkf" do
   action :install
+end
+
+if node[:platform] == "centos" and node[:platform_version] >= "6.0"
+then
+  package "perl-ExtUtils-MakeMaker" do
+    action :install
+  end
 end
 
 kakasi_ver="2.3.4"
