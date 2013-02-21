@@ -2,7 +2,7 @@
 # Cookbook Name:: keyboard
 # Recipe:: default
 #
-# Copyright 2011, ryuzee 
+# Copyright 2013, ryuzee 
 #
 # MIT License 
 #
@@ -14,7 +14,6 @@ when "debian","ubuntu"
     group "root"
     mode "0644"
   end
-
   e = execute "loadkeys jp" do
     action :run
   end
@@ -26,6 +25,5 @@ when "centos"
     group "root"
     mode "0644"
   end
-else
 end
 
