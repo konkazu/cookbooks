@@ -2,7 +2,7 @@
 # Cookbook Name:: dns
 # Recipe:: default
 #
-# Copyright 2011, ryuzee
+# Copyright 2013, ryuzee
 #
 # MIT License 
 #
@@ -14,5 +14,4 @@ when "centos"
     group "root"
     mode "0644"
   end
-else
 end
