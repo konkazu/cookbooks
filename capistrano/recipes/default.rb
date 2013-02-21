@@ -1,11 +1,18 @@
 #
-# Cookbook Name:: capistrano
+# Cookbook Name:: analog
 # Recipe:: default
 #
-# Copyright 2011, YOUR_COMPANY_NAME
+# Copyright 2013, ryuzee 
 #
-# All rights reserved - Do Not Redistribute
+# MIT License 
 #
+
+# version dependency gemfile
+gem_package "net-ssh" do
+  action :install
+  version ">=2.6.5"
+end
+
 %w{capistrano capistrano-ext capistrano_colors railsless-deploy}.each do |package_name|
   gem_package package_name do
     action :install
