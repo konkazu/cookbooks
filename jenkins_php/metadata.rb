@@ -1,6 +1,7 @@
-maintainer       "YOUR_COMPANY_NAME"
-maintainer_email "YOUR_EMAIL"
+maintainer       "ryuzee"
+maintainer_email "iryuzee@gmail.com"
 license          "All rights reserved"
-description      "Installs/Configures jenkins"
+description      "Installs/Configures jenkins for php"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
 version          "0.0.1"
+depends          "jenkins"

@@ -16,12 +16,8 @@ EOS
     action :run
   end
 
-  e = execute "sudo wget -O default.js http://updates.jenkins-ci.org/update-center.json && sed '1d;$d' default.js > default.json" do
-    action :run
-  end
-
   cmd = <<"EOS"
-  curl -X POST -H "Accept: application/json" -d @default.json http://localhost:8080/updateCenter/byId/default/postBack
+  sudo wget -O default.js http://updates.jenkins-ci.org/update-center.json && sed '1d;$d' default.js > default.json && curl -X POST -H "Accept: application/json" -d @default.json http://localhost:8080/updateCenter/byId/default/postBack
 EOS
   e = execute cmd do
     action :run
