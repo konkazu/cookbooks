@@ -8,12 +8,11 @@
 case node[:platform]
 when "centos"
 
-  cmd = <<"EOS"
-    sudo su && while [ ! `wget --retry-connrefused --tries=10 --waitretry=20 --server-response -O /var/lib/jenkins/jenkins-cli.jar http://localhost:8080/jnlpJars/jenkins-cli.jar 2>&1 | grep "200 OK"` ] ;  do wget --tries=10 --waitretry=20 -O /var/lib/jenkins/jenkins-cli.jar  http://localhost:8080/jnlpJars/jenkins-cli.jar; sleep 10; echo downloading...; done
-EOS
+  include_recipe "jenkins"
 
-  e = execute cmd do
-    action :run
+  ## Jenkinsの起動直後に取得に失敗する場合があるが自動リトライされるので非力な環境以外は問題ない
+  remote_file "/var/lib/jenkins/jenkins-cli.jar" do
+    source "http://localhost:8080/jnlpJars/jenkins-cli.jar"
   end
 
   cmd = <<"EOS"
