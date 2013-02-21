@@ -13,7 +13,7 @@ end
 
 package "perl-ExtUtils-MakeMaker" do
   action :install
-  only_if { node[:platform] == "centos" and node[:platform_version] >= "6.0" }
+  only_if { node['platform'] == "centos" and node['platform_version'] >= "6.0" }
 end
 
 namazu_version = node['namazu']['version']
