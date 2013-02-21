@@ -6,10 +6,12 @@
 #
 # MIT License 
 #
-include_recipe "rpmrepos"
 
 case node[:platform]
 when "centos"
+if node[:platform_version] >= "5.0" and node[:platform_version] <= "5.9"
+then
+  include_recipe "rpmrepos"
   # change yum settings
   %w{/etc/yum.repos.d/remi.repo /etc/yum.repos.d/epel.repo}.each do |file|
     e = execute "sed -e s/enabled=0/enabled=1/ ".concat(file).concat(" > /tmp/1; mv /tmp/1 ").concat(file) do
@@ -66,6 +68,5 @@ when "centos"
       action :run
     end
   end
-
-else
+end
 end
