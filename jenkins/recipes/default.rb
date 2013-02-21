@@ -12,13 +12,13 @@ when "centos", "amazon"
     action :install
   end
 
-  script "install_jenkins" do
-    interpreter "bash"
-    cwd "/tmp"
-    code <<-EOH
-      sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo && \
-      sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
-    EOH
+  remote_file "/etc/yum.repos.d/jenkins.repo" do
+    source "http://pkg.jenkins-ci.org/redhat/jenkins.repo"
+  end
+
+  yum_key "jenkins-ci.org.key" do
+    url "http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key"
+    action :add
   end
 
   package "jenkins" do
