@@ -11,40 +11,46 @@ package "nkf" do
   action :install
 end
 
-if node[:platform] == "centos" and node[:platform_version] >= "6.0"
-then
-  package "perl-ExtUtils-MakeMaker" do
-    action :install
-  end
+package "perl-ExtUtils-MakeMaker" do
+  action :install
+  only_if { node[:platform] == "centos" and node[:platform_version] >= "6.0" }
 end
 
-kakasi_ver="2.3.4"
-namazu_ver="2.0.21"
+namazu_version = node['namazu']['version']
+kakasi_version = node['namazu']['kakasi_version']
 
-cmd="
-if [ ! -f /usr/local/bin/mknmz ]; then
-  wget -O /tmp/kakasi-#{kakasi_ver}.tar.gz http://kakasi.namazu.org/stable/kakasi-#{kakasi_ver}.tar.gz && 
-  cd /tmp && 
-  tar xvfz kakasi-#{kakasi_ver}.tar.gz && 
-  cd kakasi-#{kakasi_ver} && 
-  ./configure && 
-  make && 
-  make install && 
-  wget -O /tmp/namazu-#{namazu_ver}.tar.gz http://www.namazu.org/stable/namazu-#{namazu_ver}.tar.gz && 
-  cd /tmp && 
-  tar xvfz namazu-#{namazu_ver}.tar.gz && 
-  cd /tmp/namazu-#{namazu_ver} && 
-  cd File-MMagic && 
-  perl Makefile.PL && 
-  make && 
-  make install && 
-  cd .. && 
-  ./configure && 
-  make && 
-  make install ;
-fi
-"
-
-execute cmd do
-  action :run
+remote_file "#{Chef::Config[:file_cache_path]}/kakasi-#{kakasi_version}.tar.gz" do
+  source "http://kakasi.namazu.org/stable/kakasi-#{kakasi_version}.tar.gz"
+  mode "0644"
+  not_if { ::File.exists?("/usr/local/bin/kakasi") }
 end
+
+bash "build-and-install-kakasi" do
+  cwd Chef::Config[:file_cache_path]
+  code <<-EOF
+    tar xvfz kakasi-#{kakasi_version}.tar.gz && 
+    cd kakasi-#{kakasi_version} && 
+    ./configure && make && make install
+  EOF
+  not_if { ::File.exists?("/usr/local/bin/kakasi") }
+end
+
+remote_file "#{Chef::Config[:file_cache_path]}/namazu-#{namazu_version}.tar.gz" do
+  source "http://www.namazu.org/stable/namazu-#{namazu_version}.tar.gz"
+  mode "0644"
+  not_if { ::File.exists?("/usr/local/bin/mknmz") }
+end
+
+bash "build-and-install-namazu" do
+  cwd Chef::Config[:file_cache_path]
+  code <<-EOF
+    tar xvfz namazu-#{namazu_version}.tar.gz && 
+    cd namazu-#{namazu_version} && 
+    cd File-MMagic && 
+    perl Makefile.PL && make && make install && 
+    cd .. && 
+    ./configure && make && make install ;
+  EOF
+  not_if { ::File.exists?("/usr/local/bin/mknmz") }
+end
+
