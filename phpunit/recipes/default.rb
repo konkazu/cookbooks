@@ -8,6 +8,10 @@
 #
 include_recipe "php"
 
+package "php-dom" do
+  action :install
+end
+
 channels = [
   "components.ez.no", 
   "pear.phpunit.de", 
@@ -16,6 +20,7 @@ channels = [
   "pear.phing.info",
   "pecl.php.net",
   "pear.pdepend.org",
+  "pear.docblox-project.org",
 ]
 
 channels.each do |chan|

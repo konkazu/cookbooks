@@ -1,3 +1,18 @@
 [submodule "yum"]
 	path = yum
 	url = https://github.com/opscode-cookbooks/yum
+[submodule "php"]
+	path = php
+	url = https://github.com/opscode-cookbooks/php
+[submodule "build-essential"]
+	path = build-essential
+	url = https://github.com/opscode-cookbooks/build-essential.git
+[submodule "mysql"]
+	path = mysql
+	url = https://github.com/opscode-cookbooks/mysql.git
+[submodule "openssl"]
+	path = openssl
+	url = https://github.com/opscode-cookbooks/openssl.git
+[submodule "xml"]
+	path = xml
+	url = https://github.com/opscode-cookbooks/xml.git
