@@ -26,3 +26,5 @@ when "centos", "amazon"
     provider Chef::Provider::Package::Rpm
   end
 end
+
+# vim: filetype=ruby.chef

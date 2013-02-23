@@ -27,3 +27,4 @@ when "centos"
   end
 end
 
+# vim: filetype=ruby.chef

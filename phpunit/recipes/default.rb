@@ -66,7 +66,7 @@ php_pear "PHPUnit" do
 end
 
 php_pear "phing" do
-  preferred_state "stable"
+  preferred_state "alpha"
   channel "phing"
   version "2.4.8"
   action :install
@@ -86,3 +86,4 @@ when "centos"
   end
 end
 
+# vim: filetype=ruby.chef

@@ -15,3 +15,5 @@ when "centos"
     mode "0644"
   end
 end
+
+# vim: filetype=ruby.chef

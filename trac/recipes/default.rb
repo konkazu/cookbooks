@@ -122,3 +122,5 @@ when "centos","amazon"
   end
 
 end
+
+# vim: filetype=ruby.chef

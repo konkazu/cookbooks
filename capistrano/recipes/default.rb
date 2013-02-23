@@ -18,3 +18,5 @@ end
     action :install
   end
 end
+
+# vim: filetype=ruby.chef

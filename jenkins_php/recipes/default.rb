@@ -32,3 +32,5 @@ EOS
     action :restart
   end
 end
+
+# vim: filetype=ruby.chef

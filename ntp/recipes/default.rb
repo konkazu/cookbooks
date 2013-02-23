@@ -27,3 +27,5 @@ when "centos", "amazon"
     command cmd
   end
 end
+
+# vim: filetype=ruby.chef

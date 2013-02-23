@@ -54,3 +54,4 @@ bash "build-and-install-namazu" do
   not_if { ::File.exists?("/usr/local/bin/mknmz") }
 end
 
+# vim: filetype=ruby.chef
