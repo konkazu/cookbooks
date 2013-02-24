@@ -10,6 +10,15 @@ include_recipe "php"
 
 package "php-dom" do
   action :install
+  only_if { node[:platform] == "centos" and node[:platform_version] >= "6.0" }
+end
+
+template "/etc/php.d/settings.ini" do
+  source "settings.ini.erb"
+  owner "root"
+  group "root"
+  mode "0644"
+  only_if { node[:platform] == "centos" and node[:platform_version] <= "5.9" and node[:platform_version] >= "5.0" }
 end
 
 channels = [
