@@ -11,7 +11,7 @@ when "centos","amazon"
 
   include_recipe "apache_mysql_php"
 
-  %w{mod_wsgi subversion mod_dav_svn}.each do |package_name|
+  %w{python-setuptools mod_wsgi subversion mod_dav_svn}.each do |package_name|
     package package_name do
       action :install
     end
