@@ -30,6 +30,15 @@ when "centos","amazon"
     end
   end
 
+  if node[:platform] =="centos" && node[:platform_version][0] == "5"
+    package "python-devel" do
+      action :install
+    end
+    easy_install_package "pysqlite" do
+      action :install
+    end
+  end
+
   easy_install_package "Trac" do
     action :install
     if node[:platform] =="centos" && node[:platform_version][0] == "5"
