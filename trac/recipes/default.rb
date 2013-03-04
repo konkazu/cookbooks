@@ -34,6 +34,12 @@ when "centos","amazon"
     package "python-devel" do
       action :install
     end
+    package "sqlite-devel" do
+      action :install
+    end
+    easy_install_package "setuptools" do
+      action :upgrade
+    end
     easy_install_package "pysqlite" do
       action :install
     end
