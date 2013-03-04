@@ -37,6 +37,7 @@ when "centos","amazon"
     package "sqlite-devel" do
       action :install
     end
+    # http://trac-hacks.org/ticket/5512
     easy_install_package "setuptools" do
       action :upgrade
     end
