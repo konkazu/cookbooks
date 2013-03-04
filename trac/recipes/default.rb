@@ -38,8 +38,8 @@ when "centos","amazon"
       action :install
     end
     # http://trac-hacks.org/ticket/5512
-    easy_install_package "setuptools" do
-      action :upgrade
+    execute "easy_install -U setuptools" do
+      action :run
     end
     easy_install_package "pysqlite" do
       action :install
