@@ -34,6 +34,13 @@ when "centos","amazon"
     package "python-devel" do
       action :install
     end
+    package "sqlite-devel" do
+      action :install
+    end
+    # http://trac-hacks.org/ticket/5512
+    execute "easy_install -U setuptools" do
+      action :run
+    end
     easy_install_package "pysqlite" do
       action :install
     end
