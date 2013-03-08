@@ -6,6 +6,9 @@
 #
 # MIT License 
 #
+if node[:platform] == "centos" and node[:platform_version] == "5.5" 
+  include_recipe "yum::remi"
+end
 
 case node[:platform]
 when "centos","amazon"
