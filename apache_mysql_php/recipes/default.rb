@@ -44,7 +44,9 @@ when "centos","amazon"
     only_if "/usr/bin/mysql -u root -e 'show databases;'"
   end
 
-  %w{php php-common php-cli php-devel php-mbstring php-pdo php-mysql php-xml php-pear}.each do |package_name|
+  packages = %w{php php-common php-cli php-devel php-mbstring php-pdo php-mysql php-xml php-pear}
+
+  packages.each do |package_name|
     yum_package package_name do
       action :install
     end
