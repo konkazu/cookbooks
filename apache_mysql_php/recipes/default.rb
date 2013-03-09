@@ -6,7 +6,7 @@
 #
 # MIT License 
 #
-if node[:platform] == "centos" and node[:platform_version] == "5.5" 
+if node[:platform] == "centos" and node[:platform_version][0] == "5" 
   include_recipe "yum::remi"
 end
 
@@ -44,13 +44,40 @@ when "centos","amazon"
     only_if "/usr/bin/mysql -u root -e 'show databases;'"
   end
 
-  packages = %w{php php-common php-cli php-devel php-mbstring php-pdo php-mysql php-xml php-pear}
+  
+  if node[:platform] == "centos" and node[:platform_version][0] == "5" 
+    packages = [
+      "php-5.3.19-1.el5.remi.x86_64.rpm",
+      "php-common-5.3.19-1.el5.remi.x86_64.rpm",
+      "php-cli-5.3.19-1.el5.remi.x86_64.rpm",
+      "php-devel-5.3.19-1.el5.remi.x86_64.rpm",
+      "php-mbstring-5.3.19-1.el5.remi.x86_64.rpm",
+      "php-pdo-5.3.19-1.el5.remi.x86_64.rpm",
+      "php-mysql-5.3.19-1.el5.remi.x86_64.rpm",
+      "php-xml-5.3.19-1.el5.remi.x86_64.rpm",
+      "php-pear-1.9.4-7.el5.remi.noarch.rpm",
+    ]
+    packages.each do |package_name|
+      remote_file "#{Chef::Config[:file_cache_path]}/#{package_name}" do
+        source  "http://rpms.famillecollet.com/enterprise/5/olds/x86_64/#{package_name}" 
+        action :create_if_missing
+        backup false
+      end
+    end 
 
-  packages.each do |package_name|
-    yum_package package_name do
-      action :install
+    e = execute "rpm -Uvh php*.rpm" do
+      action :run
+      cwd "#{Chef::Config[:file_cache_path]}"
+      not_if do File.exists?("/usr/bin/php") end
     end
-  end 
+  else
+    packages = %w{php php-common php-cli php-devel php-mbstring php-pdo php-mysql php-xml php-pear}
+    packages.each do |package_name|
+      yum_package package_name do
+        action :install
+      end
+    end 
+  end
 
   template "/etc/php.ini" do
     source "php.ini.erb"
