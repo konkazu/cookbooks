@@ -46,6 +46,12 @@ when "centos","amazon"
 
   
   if node[:platform] == "centos" and node[:platform_version][0] == "5" 
+    %w{gmp-devel libedit-devel autoconf automake libxslt-devel}.each do |package_name|
+      yum_package package_name do
+        action :install
+      end
+    end
+
     packages = [
       "php-5.3.19-1.el5.remi.#{node["arch"]}.rpm",
       "php-common-5.3.19-1.el5.remi.#{node["arch"]}.rpm",
