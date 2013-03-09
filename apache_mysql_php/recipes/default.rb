@@ -47,23 +47,28 @@ when "centos","amazon"
   
   if node[:platform] == "centos" and node[:platform_version][0] == "5" 
     packages = [
-      "php-5.3.19-1.el5.remi.x86_64.rpm",
-      "php-common-5.3.19-1.el5.remi.x86_64.rpm",
-      "php-cli-5.3.19-1.el5.remi.x86_64.rpm",
-      "php-devel-5.3.19-1.el5.remi.x86_64.rpm",
-      "php-mbstring-5.3.19-1.el5.remi.x86_64.rpm",
-      "php-pdo-5.3.19-1.el5.remi.x86_64.rpm",
-      "php-mysql-5.3.19-1.el5.remi.x86_64.rpm",
-      "php-xml-5.3.19-1.el5.remi.x86_64.rpm",
-      "php-pear-1.9.4-7.el5.remi.noarch.rpm",
+      "php-5.3.19-1.el5.remi.#{node["arch"]}.rpm",
+      "php-common-5.3.19-1.el5.remi.#{node["arch"]}.rpm",
+      "php-cli-5.3.19-1.el5.remi.#{node["arch"]}.rpm",
+      "php-devel-5.3.19-1.el5.remi.#{node["arch"]}.rpm",
+      "php-mbstring-5.3.19-1.el5.remi.#{node["arch"]}.rpm",
+      "php-pdo-5.3.19-1.el5.remi.#{node["arch"]}.rpm",
+      "php-mysql-5.3.19-1.el5.remi.#{node["arch"]}.rpm",
+      "php-xml-5.3.19-1.el5.remi.#{node["arch"]}.rpm",
     ]
     packages.each do |package_name|
       remote_file "#{Chef::Config[:file_cache_path]}/#{package_name}" do
-        source  "http://rpms.famillecollet.com/enterprise/5/olds/x86_64/#{package_name}" 
+        source  "#{node["php"]["remi_url"]}/#{package_name}" 
         action :create_if_missing
         backup false
       end
     end 
+
+    remote_file "#{Chef::Config[:file_cache_path]}/php-pear-1.9.4-7.el5.remi.noarch.rpm" do
+      source  "#{node["php"]["remi_url_x86_64"]}/php-pear-1.9.4-7.el5.remi.noarch.rpm" 
+      action :create_if_missing
+      backup false
+    end
 
     e = execute "rpm -Uvh php*.rpm" do
       action :run
